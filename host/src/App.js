@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import ReactDOM from "react";
+
+const Counter = React.lazy(() => import('app1/Counter'))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wmf-test">
+      <h1>Hello, this Componet is From Remote</h1>
+      <Suspense fallback="loading Component from remote, please wait for loading...">
+        <Counter />
+      </Suspense>
     </div>
   );
 }
 
 export default App;
+
+ReactDOM.render(<App/>, document.getElementById('root'));
