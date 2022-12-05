@@ -1,8 +1,11 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
+import "./global.css";
+import "./reset.css";
 
-const Counter = React.lazy(() => import('app1/Counter'));
+// const Counter = React.lazy(() => import('app1/Counter'));
 const Button = React.lazy(() => import('app1/Button'));
+// const DefaultLayout = React.lazy(() => import("app1/DefaultLayout"))
 
 function App() {
   return (
@@ -10,6 +13,7 @@ function App() {
     
       <h1>Hello, this Componet is From Remote</h1>
       <Suspense fallback="loading Component from remote, please wait for loading...">
+        {/* <DefaultLayout /> */}
         <Button />
       </Suspense>
     </div>
