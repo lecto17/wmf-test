@@ -35,6 +35,7 @@ module.exports = {
             filename: "remoteEntry.js",
             exposes: {
                 "./Counter": "./src/components/counter/index.jsx",
+                "./Button": "./src/components/button/index.jsx",
             },
             shared: {
                 "react": {
