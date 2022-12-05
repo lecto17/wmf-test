@@ -1,7 +1,23 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { applyMiddleware, configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import createSagaMiddleware from "@redux-saga/core";
+import rootReducer from "./reducers";
+import rootSaga from "./sagas";
 import "./global.css";
 import "./reset.css";
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
+
+sagaMiddleware.run(rootSaga);
 
 // const Counter = React.lazy(() => import('app1/Counter'));
 const Button = React.lazy(() => import('app1/Button'));
@@ -20,6 +36,13 @@ function App() {
   );
 }
 
-export default App;
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
+  </Provider>
+  , document.getElementById('root'));
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+
+  export default App;
