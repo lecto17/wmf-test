@@ -12,9 +12,11 @@ import "./reset.css";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = configureStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: [sagaMiddleware]
+}
 );
 
 sagaMiddleware.run(rootSaga);
@@ -26,7 +28,6 @@ const Button = React.lazy(() => import('app1/Button'));
 function App() {
   return (
     <div className="wmf-test">
-    
       <h1>Hello, this Componet is From Remote</h1>
       <Suspense fallback="loading Component from remote, please wait for loading...">
         {/* <DefaultLayout /> */}
