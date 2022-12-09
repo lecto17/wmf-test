@@ -38,8 +38,6 @@ module.exports = {
             library: { type: "var", name: "app1" },
             filename: "remoteEntry.js",
             exposes: {
-                "./GlobalLayout": "./src/components/layout/GlobalLayout.jsx",
-                "./GlobalMenuLayout": "./src/components/layout/GlobalMenuLayout.jsx",
                 "./GlobalNavBox": "./src/components/navigation/GlobalNavBox.jsx",
             },
             shared: {
