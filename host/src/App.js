@@ -8,6 +8,8 @@ import createSagaMiddleware from "@redux-saga/core";
 import rootReducer from "./reducers";
 import rootSaga from "./sagas";
 import styled from "@emotion/styled";
+import { ThemeProvider } from "@emotion/react";
+import cnTheme from "./theme/cnTheme";
 import "./global.css";
 import "./reset.css";
 
@@ -22,10 +24,7 @@ const store = configureStore({
 
 // sagaMiddleware.run(rootSaga);
 
-// const Counter = React.lazy(() => import('app1/Counter'));
-const Button = React.lazy(() => import('app1/Button'));
-const GlobalNav = React.lazy(() => import("app1/GlobalNav"));
-// const DefaultLayout = React.lazy(() => import("app1/DefaultLayout"))
+const GlobalNavBox = React.lazy(() => import("app1/GlobalNavBox"));
 
 const AppLayout = styled.div`
   width: 100%;
@@ -33,15 +32,106 @@ const AppLayout = styled.div`
 `;
 
 function App() {
-  const menuList = ["메뉴1", "메뉴2"];
+  const cnGlobalTopMenus = [
+    { 
+      title: "메뉴1" , 
+      subMenuList: [
+        {
+          title: "test title1"
+        },
+        {
+          title: "test title2"
+        },
+        {
+          title: "test title3"
+        },
+      ]
+    },
+    { 
+      title: "메뉴2" , 
+      subMenuList: [
+        {
+          title: "test title1"
+        },
+        {
+          title: "test title2"
+        },
+        {
+          title: "test title3"
+        },
+      ]
+    },
+    { 
+      title: "메뉴3" , 
+      subMenuList: [
+        {
+          title: "test title1"
+        },
+        {
+          title: "test title2"
+        },
+        {
+          title: "test title3"
+        },
+      ]
+    },
+    { 
+      title: "메뉴4" , 
+      subMenuList: [
+        {
+          title: "test title1"
+        },
+        {
+          title: "test title2"
+        },
+        {
+          title: "test title3"
+        },
+      ]
+    },
+  ];
+
+  const cnGlobalSideMenus = [
+    { 
+      title: "등록" , 
+      
+    },
+    { 
+      title: "접수" , 
+      
+    },
+    { 
+      title: "수납" , 
+      
+    },
+    { 
+      title: "메뉴4" , 
+      
+    },
+  ];
 
   return (
-    <AppLayout>
-      <Suspense fallback="loading Component from remote, please wait for loading...">
-        {/* <DefaultLayout /> */}
-        <GlobalNav menuList={menuList} />
-      </Suspense>
-    </AppLayout>
+    <ThemeProvider theme={cnTheme}>
+      <AppLayout>
+        <Suspense fallback="loading Component from remote, please wait for loading...">
+          <GlobalNavBox 
+            topMenus={cnGlobalTopMenus}
+            sideMenus={cnGlobalSideMenus}
+          />
+          <div
+            style={{
+              width: "calc(100% - 48px)",
+              height: "calc(100% - 30px)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            STH Children
+          </div>
+        </Suspense>
+      </AppLayout>
+    </ThemeProvider>
   );
 }
 
@@ -51,7 +141,7 @@ ReactDOM.render(
       <App/>
     </BrowserRouter>
   </Provider>
-  , document.getElementById('root'));
-
+  , document.getElementById('root')
+);
 
   export default App;
