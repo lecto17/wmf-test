@@ -19,6 +19,10 @@ module.exports = {
     module:{
         rules: [
             {
+                test: /\.css?$/,
+                use: ["style-loader", "css-loader"],
+            }, 
+            {
                 test: /\.jsx?$/,
                 loader: "babel-loader",
                 exclude: /node_modules/,
@@ -34,8 +38,9 @@ module.exports = {
             library: { type: "var", name: "app1" },
             filename: "remoteEntry.js",
             exposes: {
-                "./Counter": "./src/components/counter/index.jsx",
-                "./Button": "./src/components/button/index.jsx",
+                "./GlobalLayout": "./src/components/layout/GlobalLayout.jsx",
+                "./GlobalMenuLayout": "./src/components/layout/GlobalMenuLayout.jsx",
+                "./GlobalNavBox": "./src/components/navigation/GlobalNavBox.jsx",
             },
             shared: {
                 "react": {
